@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const checkForSession = require('./middlewares/checkForSession');
+const swagController = require('./controllers/swagController');
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.use(
   }),
 );
 app.use(checkForSession);
+
+app.get('/api/swag', swagController.read);
 
 app.listen(
   SERVER_PORT,

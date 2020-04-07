@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const checkForSession = require('./middlewares/checkForSession');
+
 const app = express();
 
 const { SERVER_PORT, SESSION_SECRET } = process.env;
@@ -13,6 +15,7 @@ app.use(
     saveUninitialized: true,
   }),
 );
+app.use(checkForSession);
 
 app.listen(
   SERVER_PORT,
